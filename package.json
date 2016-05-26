@@ -19,6 +19,8 @@
     "eslint": "^2.9.0",
     "istanbul": "^0.4.2",
     "jasmine": "^2.4.1",
+    "legion-obstacle-course": "git+ssh://git@github.com/lane-webperformance/legion-obstacle-course.git#v0.0.4",
+    "legion": "git+ssh://git@github.com/lane-webperformance/legion.git#v0.0.2",
     "rimraf": "^2.5.2"
   }
 }
