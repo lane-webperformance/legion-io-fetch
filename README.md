@@ -1,4 +1,7 @@
 
+[![Build Status](https://travis-ci.org/lane-webperformance/legion-io-fetch.svg?branch=master)](https://travis-ci.org/lane-webperformance/legion-io-fetch)
+[![Dependency Status](https://gemnasium.com/badges/github.com/lane-webperformance/legion-io-fetch.svg)](https://gemnasium.com/github.com/lane-webperformance/legion-io-fetch)
+
 Supports HTTP(S) requests in the legion load testing framework, built on top of
 [node-fetch](https://www.npmjs.com/package/node-fetch), which in turn is an
 implementation of the new Fetch API.
@@ -14,8 +17,8 @@ useful to commit to reading the entire response body before making the
 request so that we can reliably measure the time for the entire exchange.
 Accordingly, this API works a little differently from that specification.
 
-The result of every function call is a Legion Io instance containing a
-Response. Most users will be interested in the 'body' field of the response.
+The result of every function call is a Legion Io containing a Response.
+Most users will be interested in the 'body' field of the response.
 
 fetch.text(input,init)
 ---------------

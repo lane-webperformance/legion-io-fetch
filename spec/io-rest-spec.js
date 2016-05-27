@@ -33,4 +33,3 @@ describe('The fetch.rest module for legion Io', function() {
     L.run(1, testcase).result().then(done);
   });
 });
-
