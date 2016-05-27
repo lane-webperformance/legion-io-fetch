@@ -20,6 +20,21 @@ Accordingly, this API works a little differently from that specification.
 The result of every function call is a Legion Io containing a Response.
 Most users will be interested in the 'body' field of the response.
 
+Response Object
+===============
+
+ * type - the type field of the response, as defined by the fetch specification.
+ * url - the url field of the response, as defined by the fetch specification.
+ * status - the status field of the response, as defined by the fetch specification.
+ * ok - the ok field of the response, as defined by the fetch specification.
+ * statusText - the statusText of the response, as defined by the fetch specification.
+ * headers - the Headers object of the response, as defined by the fetch specification.
+ * json - the JSON content of the response, if any
+ * text - the plain text content of the response, if any
+
+API
+===
+
 fetch.text(input,init)
 ---------------
 

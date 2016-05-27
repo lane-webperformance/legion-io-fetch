@@ -27,7 +27,7 @@ function withMethod(method) {
 }
 
 module.exports.rest.get = function(input, init) {
-  fetch.json(input,init);
+  return fetch.json(input,init);
 };
 module.exports.rest.post = withMethod('POST');
 module.exports.rest.put = withMethod('PUT');
