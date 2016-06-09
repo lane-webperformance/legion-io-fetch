@@ -20,6 +20,8 @@ describe('The fetch.rest module for legion Io', function() {
   });
 
   it('executes RESTful JSON testcases', function(done) {
+    var target = metrics.Target.create(metrics.merge);
+
     var testcase = Io.of()
       .chain(fetch.rest.put(endpoint, { apples : 1, carrots : 2, bannanas : 9 }))
       .chain(fetch.rest.patch(endpoint, { apples : 10 }))
@@ -29,10 +31,12 @@ describe('The fetch.rest module for legion Io', function() {
         expect(res.json.apples).toBe(10);
         expect(res.json.carrots).toBe(202);
         expect(res.json.bannanas).toBe(10);
-      });
+        expect(JSON.parse(JSON.stringify(target.get())).tags['legion-io-fetch-request']['headers'].tags['outcome']['success'].count$sum).toBeGreaterThan(0);
+        expect(JSON.parse(JSON.stringify(target.get())).tags['legion-io-fetch-request']['content'].tags['outcome']['success'].count$sum).toBeGreaterThan(0);
+        expect(JSON.parse(JSON.stringify(target.get())).tags['legion-io-fetch-request']['headers'].tags['legion-io-fetch-request']['content']).not.toBeDefined();
+      })
+      .chain(done);
 
-    testcase.run(metrics.Target.create(metrics.merge).receiver())
-      .then(done)
-      .catch(done.fail);
+    testcase.run(target.receiver()).catch(done.fail);
   });
 });
