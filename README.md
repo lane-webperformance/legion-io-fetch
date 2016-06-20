@@ -23,7 +23,6 @@ Most users will be interested in the 'body' field of the response.
 Response Object
 ===============
 
- * type - the type field of the response, as defined by the fetch specification.
  * url - the url field of the response, as defined by the fetch specification.
  * status - the status field of the response, as defined by the fetch specification.
  * ok - the ok field of the response, as defined by the fetch specification.

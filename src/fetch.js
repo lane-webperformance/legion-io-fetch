@@ -8,20 +8,19 @@ var fetch = require('node-fetch');
 // into the time needed to fetch the headers and the time needed to fetch the
 // content.
 var tags = {};
-tags.fetch = metrics.tags.generic('legion-io-fetch-request');
+tags.fetch = metrics.tags.generic('legion-io-fetch');
 tags.fetch.headers = tags.fetch('headers');
 tags.fetch.content = tags.fetch('content');
 tags.fetch.total = tags.fetch('total');
 tags.fetch_version = metrics.tags.generic('legion-io-fetch-version');
 tags.fetch_version.current = tags.fetch_version(require('../package').version);
-tags.http = metrics.tags.protocol('http(s)'); //TODO: move this into metrics.tags
+tags.http = metrics.tags.protocol('http(s)');
 
 // Make an instrumented fetch request. This only gives us the response headers,
 // so we don't want to expose this function to the user. 
-var startFetch = instrument(function(input,init) {
+var startFetch = instrument.wrap(function(input,init) {
   return fetch(input,init).then(function(res) {
     return {
-      type : res.type,
       url : res.url,
       status : res.status,
       ok : res.ok,
@@ -38,7 +37,7 @@ var startFetch = instrument(function(input,init) {
 // 'X' in this case refers to the particular format of the content
 // consistent with the fetch API (text, json, blog, etc).
 var finishX = function(x) {
-  return instrument(function(res) {
+  return instrument.wrap(function(res) {
     return res._unsafe_original[x]().then(function(x_stuff) {
       res[x] = x_stuff;
       delete res._unsafe_original; //might decide to relax this later.
@@ -51,8 +50,8 @@ var finishX = function(x) {
 // Constructs a variation of fetch by combining startFetch().chain(finishX).
 var fetchX = function(x) {
   return function(input,init) {
-    return Io.local(function(receiver) { return receiver.tag(tags.fetch_version.current); },
-      instrument(startFetch(input,init).chain(finishX(x)), tags.http));
+    return Io.local(function(receiver) { return receiver.tag(tags.fetch_version.current, tags.http); },
+      instrument(startFetch(input,init).chain(finishX(x)), tags.fetch.total));
   };
 };
 

@@ -31,9 +31,11 @@ describe('The fetch.rest module for legion Io', function() {
         expect(res.json.apples).toBe(10);
         expect(res.json.carrots).toBe(202);
         expect(res.json.bannanas).toBe(10);
-        expect(JSON.parse(JSON.stringify(target.get())).tags['legion-io-fetch-request']['headers'].tags['outcome']['success'].count$sum).toBeGreaterThan(0);
-        expect(JSON.parse(JSON.stringify(target.get())).tags['legion-io-fetch-request']['content'].tags['outcome']['success'].count$sum).toBeGreaterThan(0);
-        expect(JSON.parse(JSON.stringify(target.get())).tags['legion-io-fetch-request']['headers'].tags['legion-io-fetch-request']['content']).not.toBeDefined();
+
+        const metrics = JSON.parse(JSON.stringify(target.get()));
+
+        expect(metrics.tags['legion-io-fetch']['headers'].tags['outcome']['success'].values.duration.$avg.size).toBeGreaterThan(0);
+        expect(metrics.tags['legion-io-fetch']['content'].tags['outcome']['success'].values.duration.$avg.size).toBeGreaterThan(0);
       })
       .chain(done);
 
