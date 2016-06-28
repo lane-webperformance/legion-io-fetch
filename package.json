@@ -11,15 +11,15 @@
   "license": "APSL-2.0",
   "dependencies": {
     "legion-io": "https://github.com/lane-webperformance/legion-io.git#v0.0.8",
-    "legion-metrics": "https://github.com/lane-webperformance/legion-metrics.git#v0.0.6",
-    "legion-instrument": "https://github.com/lane-webperformance/legion-instrument.git#v0.0.7",
+    "legion-metrics": "https://github.com/lane-webperformance/legion-metrics.git#v0.0.8",
+    "legion-instrument": "https://github.com/lane-webperformance/legion-instrument.git#v0.0.9",
     "node-fetch": "^1.5.1"
   },
   "devDependencies": {
     "eslint": "^2.9.0",
     "istanbul": "^0.4.2",
     "jasmine": "^2.4.1",
-    "legion-obstacle-course": "https://github.com/lane-webperformance/legion-obstacle-course.git#v0.0.5",
+    "legion-obstacle-course": "https://github.com/lane-webperformance/legion-obstacle-course.git#v0.0.6",
     "rimraf": "^2.5.2"
   }
 }
