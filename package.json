@@ -11,8 +11,8 @@
   "license": "APSL-2.0",
   "dependencies": {
     "legion-io": "https://github.com/lane-webperformance/legion-io.git#v0.0.8",
-    "legion-metrics": "https://github.com/lane-webperformance/legion-metrics.git#v0.0.8",
-    "legion-instrument": "https://github.com/lane-webperformance/legion-instrument.git#v0.0.9",
+    "legion-metrics": "https://github.com/lane-webperformance/legion-metrics.git#v0.0.10",
+    "legion-instrument": "https://github.com/lane-webperformance/legion-instrument.git#v0.0.11",
     "node-fetch": "^1.5.1"
   },
   "devDependencies": {
