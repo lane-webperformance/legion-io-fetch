@@ -1,8 +1,9 @@
+'use strict';
 
-var fetch = require('./fetch');
+const fetch = require('./fetch');
 
 module.exports.rest = function(input, json, init_) {
-  var init = Object.assign({},
+  const init = Object.assign({},
     init_, {
       headers : Object.assign({}, {
         'content-type' : 'application/json' },
@@ -18,7 +19,7 @@ module.exports.rest = function(input, json, init_) {
  */
 function withMethod(method) {
   return function(input, json, init_) {
-    var init = Object.assign({},
+    const init = Object.assign({},
       init_, {
         method : method });
     
@@ -29,6 +30,7 @@ function withMethod(method) {
 module.exports.rest.get = function(input, init) {
   return fetch.json(input,init);
 };
+
 module.exports.rest.post = withMethod('POST');
 module.exports.rest.put = withMethod('PUT');
 module.exports.rest.patch = withMethod('PATCH');

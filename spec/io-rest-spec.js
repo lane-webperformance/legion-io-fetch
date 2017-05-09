@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
+'use strict';
 
-var fetch = require('../src/index');
-var obstacle = require('legion-obstacle-course');
-var metrics = require('legion-metrics');
-var Io = require('legion-io');
+const fetch = require('../src/index');
+const obstacle = require('legion-obstacle-course');
+const metrics = require('legion-metrics');
+const Io = require('legion-io');
 
 describe('The fetch.rest module for legion Io', function() {
-  var host, port, server, endpoint;
+  let host, port, server, endpoint;
 
   beforeEach(function() {
     port = 5000;
@@ -20,9 +21,9 @@ describe('The fetch.rest module for legion Io', function() {
   });
 
   it('executes RESTful JSON testcases', function(done) {
-    var target = metrics.Target.create(metrics.merge);
+    const target = metrics.Target.create(metrics.merge);
 
-    var testcase = Io.of()
+    const testcase = Io.of()
       .chain(fetch.rest.put(endpoint, { apples : 1, carrots : 2, bannanas : 9 }))
       .chain(fetch.rest.patch(endpoint, { apples : 10 }))
       .chain(fetch.rest.post(endpoint, { carrots : 200, bannanas : 1 }))
@@ -36,9 +37,8 @@ describe('The fetch.rest module for legion Io', function() {
 
         expect(metrics.tags['legion-io-fetch']['headers'].tags['outcome']['success'].values.duration.$avg.size).toBeGreaterThan(0);
         expect(metrics.tags['legion-io-fetch']['content'].tags['outcome']['success'].values.duration.$avg.size).toBeGreaterThan(0);
-      })
-      .chain(done);
+      });
 
-    testcase.run(target.receiver()).catch(done.fail);
+    testcase.run({services:{metrics:target.receiver()}}).then(done).catch(done.fail);
   });
 });

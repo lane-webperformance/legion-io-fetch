@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
+'use strict';
 
-var fetch = require('../src/index');
-var metrics = require('legion-metrics');
-var obstacle = require('legion-obstacle-course');
+const fetch = require('../src/index');
+const metrics = require('legion-metrics');
+const obstacle = require('legion-obstacle-course');
 
 describe('The fetch module for legion Io', function() {
   beforeEach(function() {
@@ -18,14 +19,15 @@ describe('The fetch module for legion Io', function() {
   it('is sane', function(done) {
     fetch.text(this.host)
          .chain(console.log)
-         .run(metrics.Target.create(metrics.merge).receiver()).then(done).catch(done.fail);
+         .run({services:{metrics:metrics.Target.create(metrics.merge).receiver()}})
+         .then(done).catch(done.fail);
   });
 
   it('measures timings correctly', function(done) {
-    var target = metrics.Target.create(metrics.merge);
+    const target = metrics.Target.create(metrics.merge);
 
-    fetch.text(this.host + '/delay?response=500&content=1000').run(target.receiver()).then(function() {
-      var metrics = JSON.parse(JSON.stringify(target.get()));
+    fetch.text(this.host + '/delay?response=500&content=1000').run({services:{metrics:target.receiver()}}).then(function() {
+      const metrics = JSON.parse(JSON.stringify(target.get()));
       console.log(JSON.stringify(metrics, null, 2));
 
       expect(metrics.tags.protocol['http(s)'].values.duration.$avg.avg).toBeGreaterThan(2*(500+1000)/3-100); //this result should be the average of every result below

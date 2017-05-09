@@ -10,16 +10,16 @@
   "author": "Christopher Lane Hinson <lane@webperformance.com>",
   "license": "APSL-2.0",
   "dependencies": {
-    "legion-io": "https://github.com/lane-webperformance/legion-io.git#v0.0.20",
-    "legion-metrics": "https://github.com/lane-webperformance/legion-metrics.git#v0.0.20",
-    "legion-instrument": "https://github.com/lane-webperformance/legion-instrument.git#v0.0.20",
+    "legion-io": "https://github.com/lane-webperformance/legion-io#v0.0.28",
+    "legion-metrics": "https://github.com/lane-webperformance/legion-metrics#v0.0.28",
+    "legion-instrument": "https://github.com/lane-webperformance/legion-instrument#v0.0.28",
     "node-fetch": "^1.5.1"
   },
   "devDependencies": {
     "eslint": "^2.9.0",
     "istanbul": "^0.4.2",
     "jasmine": "^2.4.1",
-    "legion-obstacle-course": "https://github.com/lane-webperformance/legion-obstacle-course.git#v0.0.20",
+    "legion-obstacle-course": "https://github.com/lane-webperformance/legion-obstacle-course#v0.0.28",
     "rimraf": "^2.5.2"
   }
 }
