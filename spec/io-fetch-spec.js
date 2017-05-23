@@ -4,6 +4,7 @@
 const fetch = require('../src/index');
 const metrics = require('legion-metrics');
 const obstacle = require('legion-obstacle-course');
+const core = require('legion-core');
 
 describe('The fetch module for legion Io', function() {
   beforeEach(function() {
@@ -19,14 +20,14 @@ describe('The fetch module for legion Io', function() {
   it('is sane', function(done) {
     fetch.text(this.host)
          .chain(console.log)
-         .run({services:{metrics:metrics.Target.create(metrics.merge).receiver()}})
+         .run(core.Services.create().withMetricsTarget(metrics.Target.create(metrics.merge)))
          .then(done).catch(done.fail);
   });
 
   it('measures timings correctly', function(done) {
     const target = metrics.Target.create(metrics.merge);
 
-    fetch.text(this.host + '/delay?response=500&content=1000').run({services:{metrics:target.receiver()}}).then(function() {
+    fetch.text(this.host + '/delay?response=500&content=1000').run(core.Services.create().withMetricsTarget(target)).then(function() {
       const metrics = JSON.parse(JSON.stringify(target.get()));
       console.log(JSON.stringify(metrics, null, 2));
 

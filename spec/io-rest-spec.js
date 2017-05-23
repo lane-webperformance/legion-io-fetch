@@ -5,6 +5,7 @@ const fetch = require('../src/index');
 const obstacle = require('legion-obstacle-course');
 const metrics = require('legion-metrics');
 const Io = require('legion-io');
+const core = require('legion-core');
 
 describe('The fetch.rest module for legion Io', function() {
   let host, port, server, endpoint;
@@ -39,6 +40,6 @@ describe('The fetch.rest module for legion Io', function() {
         expect(metrics.tags['legion-io-fetch']['content'].tags['outcome']['success'].values.duration.$avg.size).toBeGreaterThan(0);
       });
 
-    testcase.run({services:{metrics:target.receiver()}}).then(done).catch(done.fail);
+    testcase.run(core.Services.create().withMetricsTarget(target)).then(done).catch(done.fail);
   });
 });
