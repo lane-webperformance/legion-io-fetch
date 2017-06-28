@@ -34,10 +34,12 @@ describe('The fetch.rest module for legion Io', function() {
         expect(res.json.carrots).toBe(202);
         expect(res.json.bannanas).toBe(10);
 
-        const metrics = JSON.parse(JSON.stringify(target.get()));
+        return target.flush().then(metrics => {
+          metrics = JSON.parse(JSON.stringify(metrics));
 
-        expect(metrics.tags['legion-io-fetch']['headers'].tags['outcome']['success'].values.duration.$avg.size).toBeGreaterThan(0);
-        expect(metrics.tags['legion-io-fetch']['content'].tags['outcome']['success'].values.duration.$avg.size).toBeGreaterThan(0);
+          expect(metrics.tags['legion-io-fetch']['headers'].tags['outcome']['success'].values.duration.$avg.size).toBeGreaterThan(0);
+          expect(metrics.tags['legion-io-fetch']['content'].tags['outcome']['success'].values.duration.$avg.size).toBeGreaterThan(0);
+        });
       });
 
     testcase.run(core.Services.create().withMetricsTarget(target)).then(done).catch(done.fail);

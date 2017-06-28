@@ -51,7 +51,7 @@ const finishX = function(x) {
 // Constructs a variation of fetch by combining startFetch().chain(finishX).
 const fetchX = function(x) {
   return function(input,init) {
-    return Io.local(receiver => receiver.tag(tags.fetch_version.current, tags.http),
+    return Io.local(receiver => receiver.tag([tags.fetch_version.current, tags.http]),
       instrument(startFetch(input,init).chain(finishX(x)), tags.fetch.total));
   };
 };

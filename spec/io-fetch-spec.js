@@ -27,8 +27,8 @@ describe('The fetch module for legion Io', function() {
   it('measures timings correctly', function(done) {
     const target = metrics.Target.create(metrics.merge);
 
-    fetch.text(this.host + '/delay?response=500&content=1000').run(core.Services.create().withMetricsTarget(target)).then(function() {
-      const metrics = JSON.parse(JSON.stringify(target.get()));
+    fetch.text(this.host + '/delay?response=500&content=1000').run(core.Services.create().withMetricsTarget(target)).then(() => target.flush().then(metrics => {
+      metrics = JSON.parse(JSON.stringify(metrics));
       console.log(JSON.stringify(metrics, null, 2));
 
       expect(metrics.tags.protocol['http(s)'].values.duration.$avg.avg).toBeGreaterThan(2*(500+1000)/3-100); //this result should be the average of every result below
@@ -44,9 +44,7 @@ describe('The fetch module for legion Io', function() {
       expect(metrics.tags['legion-io-fetch'].content.values.duration.$avg.avg).toBeLessThan(1000+100);
  
       expect(metrics.tags['legion-io-fetch']['headers'].tags['legion-io-fetch']['content']).not.toBeDefined();
-
-      done();
-    }).catch(done.fail);
+    })).then(done).catch(done.fail);
   });
 });
 
