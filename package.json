@@ -1,6 +1,6 @@
 {
   "name": "legion-io-fetch",
-  "version": "0.0.39",
+  "version": "0.0.41",
   "description": "Instrumented HTTP requests on top node-fetch.",
   "main": "src/index.js",
   "scripts": {
