@@ -9,7 +9,7 @@ const core = require('legion-core');
 describe('The fetch module for legion Io', function() {
   beforeEach(function() {
     this.port = 5000;
-    this.server = obstacle.listen(this.port);
+    this.server = obstacle.http.listen(this.port);
     this.host = 'http://localhost:' + this.port;
   });
 

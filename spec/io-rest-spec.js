@@ -12,7 +12,7 @@ describe('The fetch.rest module for legion Io', function() {
 
   beforeEach(function() {
     port = 5000;
-    server = obstacle.listen(port);
+    server = obstacle.http.listen(port);
     host = 'http://localhost:' + port;
     endpoint = host + '/inventory';
   });
