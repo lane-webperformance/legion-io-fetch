@@ -6,8 +6,9 @@ module.exports.rest = function(input, json, init_) {
   const init = Object.assign({},
     init_, {
       headers : Object.assign({}, {
-        'content-type' : 'application/json' },
-        init_.headers || {}),
+        'content-type' : 'application/json'
+      },
+      init_.headers || {}),
       body : init_.body || JSON.stringify(json)
     });
 

@@ -19,9 +19,9 @@ describe('The fetch module for legion Io', function() {
 
   it('is sane', function(done) {
     fetch.text(this.host)
-         .chain(console.log)
-         .run(core.Services.create().withMetricsTarget(metrics.Target.create(metrics.merge)))
-         .then(done).catch(done.fail);
+      .chain(console.log)
+      .run(core.Services.create().withMetricsTarget(metrics.Target.create(metrics.merge)))
+      .then(done).catch(done.fail);
   });
 
   it('measures timings correctly', function(done) {

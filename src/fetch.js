@@ -27,9 +27,7 @@ const startFetch = instrument.wrap(function(input,init) {
       ok : res.ok,
       statusText : res.statusText,
       headers : res.headers,
-      _unsafe_original : res //unsafe because, if you don't know what you're
-                             //doing, you're likely to goof up the timing
-                             //measurements.
+      _unsafe_original : res
     };
   });
 }, tags.fetch.headers);
