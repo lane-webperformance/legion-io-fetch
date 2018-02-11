@@ -1,6 +1,6 @@
 {
   "name": "legion-io-fetch",
-  "version": "0.0.50",
+  "version": "0.0.51",
   "description": "Instrumented HTTP requests on top node-fetch.",
   "main": "src/index.js",
   "scripts": {
@@ -10,10 +10,10 @@
   "author": "Christopher Lane Hinson <lane@webperformance.com>",
   "license": "APSL-2.0",
   "dependencies": {
-    "legion-io": "https://github.com/lane-webperformance/legion-io#v0.0.51",
-    "legion-metrics": "https://github.com/lane-webperformance/legion-metrics#v0.0.51",
     "legion-core": "https://github.com/lane-webperformance/legion-core#v0.0.51",
     "legion-instrument": "https://github.com/lane-webperformance/legion-instrument#v0.0.51",
+    "legion-io": "https://github.com/lane-webperformance/legion-io#v0.0.51",
+    "legion-metrics": "https://github.com/lane-webperformance/legion-metrics#v0.0.51",
     "node-fetch": "^1.5.1"
   },
   "devDependencies": {
